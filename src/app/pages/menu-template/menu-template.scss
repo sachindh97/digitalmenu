@@ -1,0 +1,50 @@
+.menu-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.restaurant-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #d9534f;
+}
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  color: #5a5a5a;
+}
+
+.menu-item {
+  padding: 8px 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-name {
+  font-size: 16px;
+}
+
+.menu-price {
+  font-weight: bold;
+  color: #28a745;
+}

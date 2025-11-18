@@ -1,0 +1,55 @@
+<!-- Header -->
+<div class="header">
+  <div class="logo-section">
+    <!-- <img src="assets/logo.png" alt="Restaurant Logo" class="logo"> -->
+    <div class="restaurant-name">{{restaurant_name}}</div>
+  </div>
+</div>
+
+<!-- Banner -->
+<div class="banner">
+  <img src="assets/banner.jpg" alt="Promotional Banner" class="banner-img">
+</div>
+
+<!-- Dropdown (after banner) -->
+
+        <div  class="categories">
+            <p-select [options]="categoriesOption" optionLabel="name" optionValue="id" 
+                placeholder="Select a Category" fluid inputId="selectRestaurantInputId" style="width:200px" />
+        </div>
+
+
+<div class="menu-container">
+  <!-- Loop through categories -->
+  <div *ngFor="let category of response" class="category">
+    <h2 class="category-title">{{ category.category_name }}</h2>
+
+    <!-- Loop through items -->
+     @for (item of category.MenuDetails; track $index) {
+    <div class="menu-item">
+      <!-- <img [src]="item.image" alt="{{ item.name }}" class="item-img"> -->
+
+      <div class="item-details">
+        <h3 class="item-name">
+          @if (item.menuisveg === true) {
+            <span class="veg-dot"></span>
+          }
+            @if (item.menuisveg === false) {
+<span class="nonveg-dot"></span>
+          }
+ {{ item?.menuname }}
+</h3>
+        <p class="item-desc">{{ item?.description }}</p>
+        <p class="item-extra">{{ item?.extra }}</p>
+      </div>
+
+      <div class="item-price">
+        ₹ {{ item?.menuprice }}
+      </div>
+    </div>
+     }
+
+  </div>
+</div>
+
+

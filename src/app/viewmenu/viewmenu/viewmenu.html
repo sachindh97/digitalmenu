@@ -1,0 +1,16 @@
+<div class="menu-container" *ngIf="data">
+  <!-- Restaurant Name -->
+  <div class="restaurant-title">{{ data?.restaurant_name }}</div>
+  <!-- Categories -->
+  <div *ngFor="let category of data.categories" class="category">
+    <div class="category-title">{{ category?.category_name }}</div>
+    <!-- Menu Items -->
+    <div *ngFor="let item of category.MenuDetails" class="menu-item">
+      <div class="menu-name">{{ item?.menuname }}</div>
+      <div class="menu-price">₹ {{item?.menuprice}}</div>
+    </div>
+  </div>
+</div>
+
+
+

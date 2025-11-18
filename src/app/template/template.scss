@@ -1,0 +1,145 @@
+/* Header */
+.header {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.restaurant-name {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Banner */
+.banner {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.banner-img {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Dropdown after banner */
+.categories {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.category-select {
+  padding: 8px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.veg-dot,
+.nonveg-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+  margin-right: 6px;
+}
+
+.veg-dot {
+  border-color: #2e7d32; /* green border */
+  background-color: #2e7d32; /* green fill */
+}
+
+.nonveg-dot {
+  border-color: #c62828; /* red border */
+  background-color: #c62828; /* red fill */
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .logo {
+    width: 70px;
+  }
+
+  .restaurant-name {
+    font-size: 18px;
+  }
+
+  .banner-img {
+    border-radius: 0;
+  }
+
+  .category-select {
+    width: 90%;
+  }
+}
+
+.menu-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.category {
+  margin-bottom: 25px;
+}
+
+.category-title {
+  font-size: 26px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+/* Menu Item Row */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.item-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* circular image */
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.item-desc {
+  font-size: 13px;
+  color: #555;
+  margin: 3px 0;
+}
+
+.item-extra {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  white-space: nowrap; /* keeps price on one line */
+}

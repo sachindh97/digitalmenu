@@ -1,0 +1,130 @@
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedItem()"
+            [disabled]="!selectedItem || !selectedItem.length" />
+    </ng-template>
+</p-toolbar>
+
+<p-table #dt [value]="menuItemDetails" [rows]="10" [columns]="cols" [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedItem" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Data" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]" (onLazyLoad)="loadListData($event)"   [lazy]="true"
+  [loading]="false"   [totalRecords]="totalRecords">
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Menu Item</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+        <div>
+            <label for="selectRestaurantInputId" class="block font-bold mb-3">Select Restaurant</label>
+            <p-select [options]="restaturantOption" optionLabel="name" optionValue="id" (onChange)="selectRestaurant()"
+                placeholder="Select a Restaurant" fluid inputId="selectRestaurantInputId" style="width:200px" />
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 2rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 12rem"></th>
+            <th style="min-width: 5rem">Menu Item Id</th>
+            <th pSortableColumn="name" style="min-width:16rem">
+                Name
+                <p-sortIcon field="name" />
+            </th>
+            <th>Categories</th>
+            <th>Restaurant</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Food Type</th>
+            <th>Active</th>
+
+        </tr>
+    </ng-template>
+    <ng-template #body let-menuItem>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="menuItem" />
+            </td>
+                        <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"
+                    (click)="editItem(menuItem)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                    (click)="deleteItem(menuItem)" />
+            </td>
+            <td style="min-width: 12rem">{{ menuItem.menuitem_id }}</td>
+            <td style="min-width: 16rem">{{ menuItem.menuitem_name }}</td>
+            <td style="min-width: 16rem">{{ menuItem.categories_name }}</td>
+            <td style="min-width: 16rem">{{ menuItem.restaurant_name }}</td>
+            <td style="min-width: 16rem">{{ menuItem.menuitem_description }}</td>
+            <td style="min-width: 16rem">{{ menuItem.menuitem_price }}</td>
+            <td style="min-width: 16rem">{{ menuItem.menuitem_isveg ? 'Veg' : 'Non Veg' }}</td>
+            <td style="min-width: 16rem">{{ menuItem.menuitem_active ? 'Yes' : 'No' }}</td>
+
+
+
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="{{showTitle}}" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <form [formGroup]="menuItemForm">
+
+                <div class="mt-3">
+                    <label for="name" class="block font-bold mb-3">Name</label>
+                    <input type="text" pInputText id="name" formControlName="name" required autofocus fluid />
+                </div>
+                <div class="mt-3">
+                    <label for="description" class="block font-bold mb-3">Description</label>
+                    <input type="text" pInputText id="description" formControlName="description" required autofocus
+                        fluid />
+                </div>
+                <div class="mt-3">
+                    <label for="price" class="block font-bold mb-3">Price</label>
+                    <input type="number" pInputText id="price" formControlName="price" required autofocus fluid />
+                </div>
+                <div class="field w-full mt-4">
+                    <p-select [options]="restaturantOption" optionLabel="name" optionValue="id"
+                        placeholder="Select a Restaurant" class="w-full" formControlName="selectedRestaurant"
+                        appendTo="body" (onChange)="onRestaurantSelect($event)" />
+                </div>
+
+                <div class="field w-full mt-4">
+                    <p-select [options]="categoriesOption" optionLabel="name" optionValue="id"
+                        placeholder="Select a Categories" class="w-full" formControlName="selectedCategories"
+                        appendTo="body" />
+                </div>
+                <div class="mt-3">
+                    <label class="block font-bold mb-3">Active</label>
+                    <p-select [options]="activeOptions" optionLabel="name" optionValue="code"
+                        placeholder="Select Option" class="w-full" formControlName="active"
+                        appendTo="body" />
+                </div>
+                    <div class="mt-3">
+                    <label class="block font-bold mb-3">Food Type</label>
+                    <p-select [options]="foodTypeOptions" optionLabel="name" optionValue="code"
+                        placeholder="Select Option" class="w-full" formControlName="isveg"
+                        appendTo="body" />
+                </div>
+            </form>
+
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveData()" />
+    </ng-template>
+</p-dialog>
+
+
+<p-confirmdialog [style]="{ width: '450px' }" />
+<p-toast />
